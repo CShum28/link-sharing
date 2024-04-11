@@ -13,7 +13,7 @@ const SecondaryButton: React.FC<SecondaryButtonProps> = ({
     <button
       onClick={onClick}
       className={
-        "text-primary bg-white h-12 rounded-md w-full border-2 border-primary active:bg-active"
+        "text-primary bg-white h-12 rounded-lg w-full border-2 border-primary active:bg-active"
       }
     >
       {children}

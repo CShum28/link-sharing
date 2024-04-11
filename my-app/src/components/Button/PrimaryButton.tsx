@@ -15,7 +15,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
     <button
       onClick={onClick}
       className={
-        "text-white h-12 rounded-md w-full border-2 " +
+        "text-white h-12 rounded-lg w-full border-2 " +
         `${
           disabled
             ? "bg-disabled cursor-not-allowed"
