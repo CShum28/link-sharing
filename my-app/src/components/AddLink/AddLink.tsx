@@ -23,6 +23,12 @@ interface Options {
 const options: Options[] = [
   {
     image: "",
+    value: "",
+    label: "- Please select an option -",
+    placeholder: "",
+  },
+  {
+    image: "",
     value: "github",
     label: "Github",
     placeholder: "eg. https://github.com/username",
