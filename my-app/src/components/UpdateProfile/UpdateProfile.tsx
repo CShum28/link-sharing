@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import PrimaryButton from "../Button/PrimaryButton";
 
 interface Profile {
   photo: File | null;
@@ -75,7 +76,9 @@ const UpdateProfile: React.FC<UpdateProfileProps> = ({
             onChange={onTextChange}
           />
         </div>
-        <button onClick={submit}>Submit</button>
+      </div>
+      <div className="border-t-2 p-3 bg-background rounded-b-lg">
+        <PrimaryButton children="Save" onClick={submit} />
       </div>
     </div>
   );
