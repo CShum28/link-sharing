@@ -6,6 +6,9 @@ import PrimaryButton from "@/components/Button/PrimaryButton";
 import SecondaryButton from "@/components/Button/SecondaryButton";
 import AddLink from "@/components/AddLink/AddLink";
 import Image from "next/image";
+import { useMutation, useQuery } from "convex/react";
+import { api } from "../../../convex/_generated/api";
+import { useUser } from "@clerk/nextjs";
 
 interface LinkInfo {
   number: number;
@@ -13,8 +16,25 @@ interface LinkInfo {
   link: string;
   placeholder: string;
 }
+
 export default function CustomizeLink() {
   const [links, setLinks] = useState<LinkInfo[]>([]);
+
+  // Get existing user through clerk
+  const { user } = useUser();
+
+  const data = useQuery(api.getLinks.getLinks, { userId: user?.id || "" });
+
+  useEffect(() => {
+    // Assuming 'data' will be the array of links once the query completes
+    if (data) {
+      setLinks(data);
+      console.log("user data: ", data);
+    }
+  }, [data]); // Re-run the effect when 'data' changes
+
+  // Convex updateLinks mutation
+  const updateLinks = useMutation(api.updateLinks.updateLinks);
 
   const addLink = () => {
     console.log("add");
@@ -39,18 +59,6 @@ export default function CustomizeLink() {
     );
   };
 
-  // Updates the link number listings on the link
-  const updateLinkNumbers = () => {
-    setLinks((currentLinks) =>
-      currentLinks.map((linkInfo, index) => {
-        return {
-          ...linkInfo,
-          number: index + 1,
-        };
-      })
-    );
-  };
-
   const deleteLink = (removeNum: number) => {
     setLinks((currentLinks) => {
       const newLinks = currentLinks.filter((link) => link.number !== removeNum);
@@ -59,13 +67,16 @@ export default function CustomizeLink() {
     });
   };
 
-  useEffect(() => {
-    console.log("Links updated:", links); // This will log the updated state after changes
-    // updateLinkNumbers();
-  }, [links]);
+  const submitLinks = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    // Ensure the user is defined before proceeding.
+    if (!user || typeof user.id !== "string") {
+      console.error("No user id found");
+      return; // Exit the function if there's no user id.
+    }
 
-  const submitLinks = () => {
     console.log(links);
+    updateLinks({ links: links, userId: user.id });
   };
 
   return (
@@ -81,36 +92,38 @@ export default function CustomizeLink() {
       <div className="my-8">
         <SecondaryButton children={"+ Add new link"} onClick={addLink} />
       </div>
-      {links.length === 0 && (
-        <div className="my-8 bg-background border-2 flex flex-col items-center rounded-md text-center px-6 py-12 mx-auto">
-          <Image
-            src="/get-started.png"
-            width={125}
-            height={80}
-            alt="Let's get started image"
-          />
-          <p className="text-2xl font-bold my-4">Let's get you started</p>
-          <p className="text-secondaryText">
-            Use the "Add new link" button to get started. Once you have more
-            than one link, you can reorder and edit them. We're here to help you
-            share your profiles with everyone!
-          </p>
-        </div>
-      )}
-      {links.map((link) => (
-        <div key={link.number} className="flex flex-row">
-          <AddLink
-            linkInfo={link}
-            updateLink={updateLink}
-            deleteLink={deleteLink}
-          />
-        </div>
-      ))}
-      <PrimaryButton
-        children="Save"
-        disabled={links.length === 0}
-        onClick={submitLinks}
-      />
+      <form onSubmit={submitLinks}>
+        {links.length === 0 && (
+          <div className="my-8 bg-background border-2 flex flex-col items-center rounded-md text-center px-6 py-12 mx-auto">
+            <Image
+              src="/get-started.png"
+              width={125}
+              height={80}
+              alt="Let's get started image"
+            />
+            <p className="text-2xl font-bold my-4">Let's get you started</p>
+            <p className="text-secondaryText">
+              Use the "Add new link" button to get started. Once you have more
+              than one link, you can reorder and edit them. We're here to help
+              you share your profiles with everyone!
+            </p>
+          </div>
+        )}
+        {links.map((link) => (
+          <div key={link.number} className="flex flex-row">
+            <AddLink
+              linkInfo={link}
+              updateLink={updateLink}
+              deleteLink={deleteLink}
+            />
+          </div>
+        ))}
+        <PrimaryButton
+          type="submit"
+          children="Save"
+          disabled={links.length === 0}
+        />
+      </form>
     </main>
   );
 }
