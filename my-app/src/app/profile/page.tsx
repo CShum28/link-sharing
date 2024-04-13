@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Logo from "@/components/Logo";
 import UpdateProfile from "@/components/UpdateProfile/UpdateProfile";
+import { useMutation } from "convex/react";
 
 interface ProfileInfo {
   photo: File | null;
@@ -27,8 +28,8 @@ export default function Profile() {
     }));
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
     if (!files || files.length === 0) {
       // If no files are selected, do nothing or handle as necessary
       return;
@@ -49,9 +50,11 @@ export default function Profile() {
     <main className="min-h-screen mobile:p-8 tablet:p-24 desktop:p-36">
       <div>
         <Logo />
-        <div>
-          <p>Profile Details</p>
-          <p>Add your details to create a personal touch to your profile.</p>
+        <div className="pt-4 mt-4">
+          <p className="text-2xl font-bold">Profile Details</p>
+          <p className="text-secondaryText mt-2">
+            Add your details to create a personal touch to your profile.
+          </p>
         </div>
         <UpdateProfile
           profile={profile}
