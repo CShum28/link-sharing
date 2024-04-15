@@ -23,6 +23,10 @@ export default function CustomizeLink() {
   // Get existing user through clerk
   const { user } = useUser();
 
+  // Convex updateLinks mutation
+  const updateLinks = useMutation(api.updateLinks.updateLinks);
+
+  // Query for updated link data
   const data = useQuery(api.getLinks.getLinks, { userId: user?.id || "" });
 
   useEffect(() => {
@@ -32,9 +36,6 @@ export default function CustomizeLink() {
       console.log("user data: ", data);
     }
   }, [data]); // Re-run the effect when 'data' changes
-
-  // Convex updateLinks mutation
-  const updateLinks = useMutation(api.updateLinks.updateLinks);
 
   const addLink = () => {
     console.log("add");
