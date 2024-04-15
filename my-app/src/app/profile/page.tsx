@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import Logo from "@/components/Logo";
 import UpdateProfile from "@/components/UpdateProfile/UpdateProfile";
 import { useMutation } from "convex/react";
+import { api } from "../../../convex/_generated/api";
+import { useUser } from "@clerk/nextjs";
 
 interface ProfileInfo {
   photo: File | null;
@@ -19,6 +21,11 @@ export default function Profile() {
     lastName: "",
     email: "",
   });
+
+  // Get existing user through clerk
+  const { user } = useUser();
+
+  const updateProfile = useMutation(api.updateProfile.updateProfile);
 
   const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -42,8 +49,26 @@ export default function Profile() {
     }));
   };
 
-  const submit = () => {
-    console.log(profile);
+  const submit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    // Ensure the user is defined before proceeding.
+    if (!user || typeof user.id !== "string") {
+      console.error("No user id found");
+      return; // Exit the function if there's no user id.
+    }
+
+    // Step 1: Get a short-lived upload URL
+    const postUrl = await generateUploadUrl();
+    // Step 2: POST the file to the URL
+    const result = await fetch(postUrl, {
+      method: "POST",
+      headers: { "Content-Type": selectedImage!.type },
+      body: selectedImage,
+    });
+    const { storageId } = await result.json();
+
+    updateProfile({ userId: user.id, profile: profile });
   };
 
   return (
