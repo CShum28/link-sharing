@@ -17,6 +17,7 @@ import type {
 import type * as createUser from "../createUser.js";
 import type * as getLinks from "../getLinks.js";
 import type * as updateLinks from "../updateLinks.js";
+import type * as updateProfile from "../updateProfile.js";
 
 /**
  * A utility for referencing Convex functions in your app's API.
@@ -30,6 +31,7 @@ declare const fullApi: ApiFromModules<{
   createUser: typeof createUser;
   getLinks: typeof getLinks;
   updateLinks: typeof updateLinks;
+  updateProfile: typeof updateProfile;
 }>;
 export declare const api: FilterApi<
   typeof fullApi,
