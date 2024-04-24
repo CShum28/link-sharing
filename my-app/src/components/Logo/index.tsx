@@ -3,15 +3,13 @@ import Image from "next/image";
 const Logo = () => {
   return (
     <div className="flex flex-row items-center">
-      <img
-        src="/logo.png"
-        alt="DevLinks Logo"
-        style={{ width: "33.33px", height: "33.33px", margin: "0 10px 0 0" }}
-      />
-      <img
+      <Image src="/logo.png" width={33.33} height={33.33} alt="DevLinks Logo" />
+      <Image
         src="/devlinks.png"
-        alt="DevLinks"
-        style={{ width: "135px", height: "26.25px" }}
+        width={135}
+        height={26.25}
+        alt="Let's get started image"
+        className="mobile:hidden"
       />
     </div>
   );
