@@ -81,10 +81,7 @@ export default function CustomizeLink() {
   };
 
   return (
-    <main className="min-h-screen mobile:p-8 tablet:p-24 desktop:p-36">
-      <div className="">
-        <Logo />
-      </div>
+    <main>
       <p className="text-2xl font-bold">Customize your links</p>
       <p className="text-secondaryText">
         Add/edit/remove links below and then share all your profiles with the
