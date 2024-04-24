@@ -5,7 +5,7 @@ import Logo from "../Logo";
 import Image from "next/image";
 import Link from "next/link";
 import clsx from "clsx";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const links = [
   {
@@ -23,41 +23,58 @@ const links = [
 ];
 
 export default function Header() {
+  // Get the pathname for clsx css
   const pathname = usePathname();
+  // Router to go back to previous page
+  const router = useRouter();
+  // Back to previous page from /preview
+  const goBack = () => {
+    router.back();
+  };
+
   return (
-    <div className="flex flex-row justify-between items-center mb-4">
-      <Logo />
-      <div className="flex flex-row">
-        {links.map((link) => {
-          return (
-            <Link
-              href={link.href}
-              className={clsx("py-2 px-6 rounded-lg", {
-                "bg-disabled": pathname === link.href,
-              })}
-            >
-              <Image
-                src={link.icon}
-                width={20}
-                height={20}
-                alt={link.linkAlt}
-              />
-            </Link>
-          );
-        })}
-      </div>
-      <Link
-        href={"/preview"}
-        className="border-2 p-3 rounded-lg border-primary"
-      >
-        <Image
-          src="/eye.png"
-          width={15}
-          height={10}
-          alt="Preview eye"
-          className="text-primary"
-        />
-      </Link>
+    <div className="">
+      {pathname !== "/preview" ? (
+        <div className="flex flex-row justify-between items-center mb-4">
+          <Logo />
+          <div className="flex flex-row">
+            {links.map((link) => {
+              return (
+                <Link
+                  href={link.href}
+                  className={clsx("py-2 px-6 rounded-lg", {
+                    "bg-disabled": pathname === link.href,
+                  })}
+                >
+                  <Image
+                    src={link.icon}
+                    width={20}
+                    height={20}
+                    alt={link.linkAlt}
+                  />
+                </Link>
+              );
+            })}
+          </div>
+          <Link
+            href={"/preview"}
+            className="border-2 p-3 rounded-lg border-primary"
+          >
+            <Image
+              src="/eye.png"
+              width={15}
+              height={10}
+              alt="Preview eye"
+              className="text-primary"
+            />
+          </Link>
+        </div>
+      ) : (
+        <div className="flex justify-between ">
+          <button onClick={goBack}>Back to Editor</button>
+          <button>Share Link</button>
+        </div>
+      )}
     </div>
   );
 }
