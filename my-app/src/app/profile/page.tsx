@@ -58,23 +58,25 @@ export default function Profile() {
       return; // Exit the function if there's no user id.
     }
 
-    // Step 1: Get a short-lived upload URL
-    const postUrl = await generateUploadUrl();
-    // Step 2: POST the file to the URL
-    const result = await fetch(postUrl, {
-      method: "POST",
-      headers: { "Content-Type": selectedImage!.type },
-      body: selectedImage,
-    });
-    const { storageId } = await result.json();
+    // // Step 1: Get a short-lived upload URL
+    // const postUrl = await generateUploadUrl();
+    // // Step 2: POST the file to the URL
+    // const result = await fetch(postUrl, {
+    //   method: "POST",
+    //   headers: { "Content-Type": selectedImage!.type },
+    //   body: selectedImage,
+    // });
+    // const { storageId } = await result.json();
 
     updateProfile({ userId: user.id, profile: profile });
   };
 
   return (
-    <main className="min-h-screen mobile:p-8 tablet:p-24 desktop:p-36">
+    <main
+    // className="min-h-screen mobile:p-8 tablet:p-24 desktop:p-36"
+    >
       <div>
-        <Logo />
+        {/* <Logo /> */}
         <div className="pt-4 mt-4">
           <p className="text-2xl font-bold">Profile Details</p>
           <p className="text-secondaryText mt-2">
