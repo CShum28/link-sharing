@@ -1,14 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import Logo from "@/components/Logo";
 import UpdateProfile from "@/components/UpdateProfile/UpdateProfile";
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { useUser } from "@clerk/nextjs";
 
 interface ProfileInfo {
-  photo: File | null;
+  photo: any;
   firstName: string;
   lastName: string;
   email: string;
@@ -26,6 +25,8 @@ export default function Profile() {
   const { user } = useUser();
 
   const updateProfile = useMutation(api.updateProfile.updateProfile);
+
+  const generateUploadUrl = useMutation(api.updateProfile.generateUploadUrl);
 
   const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -49,7 +50,7 @@ export default function Profile() {
     }));
   };
 
-  const submit = (event: React.FormEvent<HTMLFormElement>) => {
+  const submit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     // Ensure the user is defined before proceeding.
@@ -58,26 +59,32 @@ export default function Profile() {
       return; // Exit the function if there's no user id.
     }
 
-    // // Step 1: Get a short-lived upload URL
-    // const postUrl = await generateUploadUrl();
-    // // Step 2: POST the file to the URL
-    // const result = await fetch(postUrl, {
-    //   method: "POST",
-    //   headers: { "Content-Type": selectedImage!.type },
-    //   body: selectedImage,
-    // });
-    // const { storageId } = await result.json();
+    // Step 1: Get a short-lived upload URL
+    const postUrl = await generateUploadUrl();
+    // Step 2: POST the file to the URL
+    const result = await fetch(postUrl, {
+      method: "POST",
+      headers: { "Content-Type": "image/png" },
+      body: profile.photo,
+    });
+    const { storageId } = await result.json();
 
-    updateProfile({ userId: user.id, profile: profile });
+    console.log(profile);
+    updateProfile({
+      userId: user.id,
+      profile: {
+        photo: storageId,
+        firstName: profile.firstName,
+        lastName: profile.lastName,
+        email: profile.email,
+      },
+    });
   };
 
   return (
-    <main
-    // className="min-h-screen mobile:p-8 tablet:p-24 desktop:p-36"
-    >
+    <main>
       <div>
-        {/* <Logo /> */}
-        <div className="pt-4 mt-4">
+        <div>
           <p className="text-2xl font-bold">Profile Details</p>
           <p className="text-secondaryText mt-2">
             Add your details to create a personal touch to your profile.
