@@ -3,7 +3,7 @@ import Image from "next/image";
 import PrimaryButton from "../Button/PrimaryButton";
 
 interface Profile {
-  photo: File | null;
+  photo: any;
   firstName: string;
   lastName: string;
   email: string;
@@ -79,7 +79,7 @@ const UpdateProfile: React.FC<UpdateProfileProps> = ({
           </div>
         </div>
         <div className="border-t-2 p-3 bg-background rounded-b-lg">
-          <PrimaryButton children="Save" type="submit" />
+          <PrimaryButton children="Save" type="submit" widthFull />
         </div>
       </form>
     </div>
