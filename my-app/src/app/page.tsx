@@ -1,9 +1,5 @@
 // "use client";
 
-import Logo from "../components/Logo";
-import PrimaryButton from "@/components/Button/PrimaryButton";
-// import { useRouter } from "next/navigation";
-
 import { SignInButton, SignOutButton, auth } from "@clerk/nextjs";
 
 export default function Home() {
