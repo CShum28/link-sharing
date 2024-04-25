@@ -5,6 +5,8 @@ import Logo from "../Logo";
 import Image from "next/image";
 import Link from "next/link";
 import clsx from "clsx";
+import PrimaryButton from "../Button/PrimaryButton";
+import SecondaryButton from "../Button/SecondaryButton";
 import { usePathname, useRouter } from "next/navigation";
 
 const links = [
@@ -33,7 +35,7 @@ export default function Header() {
   };
 
   return (
-    <div className="">
+    <div className="mb-8">
       {pathname !== "/preview" ? (
         <div className="flex flex-row justify-between items-center mb-4">
           <Logo />
@@ -70,9 +72,18 @@ export default function Header() {
           </Link>
         </div>
       ) : (
-        <div className="flex justify-between ">
-          <button onClick={goBack}>Back to Editor</button>
-          <button>Share Link</button>
+        <div className="flex justify-between">
+          <SecondaryButton
+            children="Back to Editor"
+            onClick={goBack}
+            widthSmall
+          />
+          <PrimaryButton
+            children="Share Link"
+            type="submit"
+            onClick={goBack}
+            widthSmall
+          />
         </div>
       )}
     </div>
