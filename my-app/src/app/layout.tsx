@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="min-h-screen mobile:p-8 tablet:p-24 desktop:p-36">
+        <div className="min-h-screen mobile:p-8 tablet:px-24 tablet:pt-8 desktop:px-36 desktop:pt-8">
           <Header />
           <ConvexClientProvider>{children}</ConvexClientProvider>
         </div>
