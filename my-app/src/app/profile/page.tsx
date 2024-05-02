@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import UpdateProfile from "@/components/UpdateProfile/UpdateProfile";
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
@@ -8,6 +8,7 @@ import { useUser } from "@clerk/nextjs";
 
 interface ProfileInfo {
   photo: any;
+  photoPreview: any;
   firstName: string;
   lastName: string;
   email: string;
@@ -16,10 +17,15 @@ interface ProfileInfo {
 export default function Profile() {
   const [profile, setProfile] = useState<ProfileInfo>({
     photo: null,
+    photoPreview: null,
     firstName: "",
     lastName: "",
     email: "",
   });
+
+  useEffect(() => {
+    console.log(profile);
+  }, [profile]);
 
   // Get existing user through clerk
   const { user } = useUser();
@@ -42,11 +48,16 @@ export default function Profile() {
       // If no files are selected, do nothing or handle as necessary
       return;
     }
+
+    const file = files[0];
+    const previewUrl = URL.createObjectURL(file);
+
     // We can now safely access the first file because we've made sure
     // that files is not null and not empty
     setProfile((prevProfile) => ({
       ...prevProfile,
-      photo: files[0],
+      photo: file, // sets the actual photo file to be saved
+      photoPreview: previewUrl, // a preview of the photo that is to be uploaded
     }));
   };
 
