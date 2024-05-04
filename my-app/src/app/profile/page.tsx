@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import UpdateProfile from "@/components/UpdateProfile/UpdateProfile";
-import { useMutation } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { useUser } from "@clerk/nextjs";
 
@@ -22,13 +22,23 @@ export default function Profile() {
     lastName: "",
     email: "",
   });
-
-  useEffect(() => {
-    console.log(profile);
-  }, [profile]);
-
   // Get existing user through clerk
   const { user } = useUser();
+
+  // Query for profile data (if it exists)
+  const profileData = useQuery(api.getProfiles.getProfiles, {
+    userId: user?.id || "",
+  });
+
+  useEffect(() => {
+    if (profileData && profileData.length > 0) {
+      const profileInfo = profileData[0];
+      console.log(profileInfo);
+      setProfile({
+        ...profileInfo,
+      });
+    }
+  }, [profileData]);
 
   const updateProfile = useMutation(api.updateProfile.updateProfile);
 

@@ -10,7 +10,7 @@ export const updateProfile = mutation({
   args: {
     userId: v.string(),
     profile: v.object({
-      photo: v.string(),
+      photo: v.id("_storage"),
       firstName: v.string(),
       lastName: v.string(),
       email: v.string(),

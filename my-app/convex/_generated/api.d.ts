@@ -16,6 +16,7 @@ import type {
 } from "convex/server";
 import type * as createUser from "../createUser.js";
 import type * as getLinks from "../getLinks.js";
+import type * as getProfiles from "../getProfiles.js";
 import type * as updateLinks from "../updateLinks.js";
 import type * as updateProfile from "../updateProfile.js";
 
@@ -30,6 +31,7 @@ import type * as updateProfile from "../updateProfile.js";
 declare const fullApi: ApiFromModules<{
   createUser: typeof createUser;
   getLinks: typeof getLinks;
+  getProfiles: typeof getProfiles;
   updateLinks: typeof updateLinks;
   updateProfile: typeof updateProfile;
 }>;
