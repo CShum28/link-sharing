@@ -35,7 +35,11 @@ export default function Profile() {
       const profileInfo = profileData[0];
       console.log(profileInfo);
       setProfile({
-        ...profileInfo,
+        photo: profileInfo.imageUrl,
+        photoPreview: profileInfo.imageUrl,
+        firstName: profileInfo.firstName,
+        lastName: profileInfo.lastName,
+        email: profileInfo.email,
       });
     }
   }, [profileData]);
