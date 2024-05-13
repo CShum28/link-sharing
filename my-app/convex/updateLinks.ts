@@ -10,6 +10,7 @@ export const updateLinks = mutation({
         platform: v.string(),
         link: v.string(),
         placeholder: v.string(),
+        color: v.string(),
         // All the below are needed to remove validator error
         userId: v.optional(v.any()),
         _id: v.optional(v.any()),
@@ -18,6 +19,7 @@ export const updateLinks = mutation({
     ),
   },
   handler: async (ctx, args) => {
+    console.log(args.links);
     // Get array of existing links
     const existingLinks = await ctx.db
       .query("links")
@@ -39,6 +41,7 @@ export const updateLinks = mutation({
         platform: linkInfo.platform,
         link: linkInfo.link,
         placeholder: linkInfo.placeholder,
+        color: linkInfo.color,
       })
     );
 
