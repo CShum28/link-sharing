@@ -15,5 +15,6 @@ export default defineSchema({
     platform: v.string(),
     link: v.string(),
     placeholder: v.string(),
+    color: v.string(),
   }),
 });
