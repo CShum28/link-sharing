@@ -14,6 +14,7 @@ interface LinkInfo {
   platform: string;
   link: string;
   placeholder: string;
+  color: string;
 }
 
 export default function CustomizeLink() {
@@ -44,6 +45,7 @@ export default function CustomizeLink() {
       platform: "", // Placeholder value, replace with actual data as needed
       link: "", // Placeholder value, replace with actual data as needed
       placeholder: "",
+      color: "",
     };
 
     // Update the state with the new link object
