@@ -5,6 +5,7 @@ interface LinkInfo {
   platform: string;
   link: string;
   placeholder: string;
+  color: string;
 }
 
 interface AddLinkProps {
@@ -18,6 +19,7 @@ interface Options {
   value: string;
   label: string;
   placeholder: string;
+  color: string;
 }
 
 const options: Options[] = [
@@ -26,90 +28,105 @@ const options: Options[] = [
     value: "",
     label: "- Please select an option -",
     placeholder: "",
+    color: "",
   },
   {
     image: "",
     value: "github",
     label: "Github",
     placeholder: "eg. https://github.com/username",
+    color: "1A1A1A",
   },
   {
     image: "",
     value: "frontendMentor",
     label: "Frontend Mentor",
     placeholder: "eg. https://www.frontendmentor.io/profile/username",
+    color: "FFFFFF",
   },
   {
     image: "",
     value: "twitter",
     label: "Twitter",
     placeholder: "eg. https://twitter.com/username",
+    color: "43B7E9",
   },
   {
     image: "",
     value: "linkedIn",
     label: "LinkedIn",
     placeholder: "eg. https://www.linkedin.com/in/username",
+    color: "2D68FF",
   },
   {
     image: "",
     value: "youTube",
     label: "YouTube",
     placeholder: "eg. https://www.youtube.com/c/username",
+    color: "EE3939",
   },
   {
     image: "",
     value: "facebook",
     label: "Facebook",
     placeholder: "eg. https://www.facebook.com/username",
+    color: "2442AC",
   },
   {
     image: "",
     value: "twitch",
     label: "Twitch",
     placeholder: "eg. https://www.twitch.tv/username",
+    color: "EE3FC8",
   },
   {
     image: "",
     value: "devTo",
     label: "Dev.to",
     placeholder: "eg. https://dev.to/username",
+    color: "71797E",
   },
   {
     image: "",
     value: "codewars",
     label: "Codewars",
     placeholder: "eg. https://www.codewars.com/users/username",
+    color: "8A1A50",
   },
   {
     image: "",
     value: "codepen",
     label: "Codepen",
     placeholder: "eg. https://codepen.io/username",
+    color: "",
   },
   {
     image: "",
     value: "freeCodeCamp",
     label: "freeCodeCamp",
     placeholder: "eg. https://www.freecodecamp.org/username",
+    color: "302267",
   },
   {
     image: "",
     value: "gitLab",
     label: "GitLab",
     placeholder: "eg. https://gitlab.com/username",
+    color: "EB4925",
   },
   {
     image: "",
     value: "hashnode",
     label: "Hashnode",
     placeholder: "eg. https://username.hashnode.dev",
+    color: "0330D1",
   },
   {
     image: "",
     value: "stackOverflow",
     label: "Stack Overflow",
     placeholder: "eg. https://stackoverflow.com/users/userid/username",
+    color: "EC7100",
   },
 ];
 
@@ -124,6 +141,7 @@ const AddLink: React.FC<AddLinkProps> = ({
     platform: linkInfo.platform,
     link: linkInfo.link,
     placeholder: linkInfo.placeholder,
+    color: linkInfo.color,
   });
 
   // This effect ensures that the local state of this component remains in sync with its props.
@@ -136,13 +154,34 @@ const AddLink: React.FC<AddLinkProps> = ({
   }, [linkInfo]);
 
   const handlePlatformChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const updatedLink = { ...link, platform: e.target.value };
-    setLink(updatedLink);
-    updateLink(updatedLink);
+    const selectedPlatform = e.target.value;
+
+    // Find the selected platform details from options
+    const platformDetails = options.find(
+      (option) => option.value === selectedPlatform
+    );
+
+    console.log(platformDetails);
+
+    if (platformDetails) {
+      // Create a new updatedLink with the platform details including color and placeholder
+      const updatedLink = {
+        ...link,
+        platform: selectedPlatform,
+        color: platformDetails.color,
+        placeholder: platformDetails.placeholder,
+      };
+
+      console.log(updatedLink);
+      // Update the local state and notify the parent component
+      setLink(updatedLink);
+      updateLink(updatedLink);
+    }
   };
 
   const handleLinkChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const updatedLink = { ...link, link: e.target.value };
+
     setLink(updatedLink);
     updateLink(updatedLink);
   };
