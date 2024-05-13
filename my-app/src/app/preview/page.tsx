@@ -21,7 +21,7 @@ export default function Preview() {
   useEffect(() => {
     console.log(profileData);
     console.log(linksData);
-    console.log(user);
+    // console.log(user);
   }, [profileData, linksData, user]);
 
   return (
@@ -30,16 +30,26 @@ export default function Preview() {
         <div className="flex flex-col items-center">
           {/* Profile image */}
           <img
-            src={profileData ? profileData[0]?.imageUrl : ""}
+            src={profileData ? (profileData[0]?.imageUrl as string) : ""}
             alt={profileData ? "Profile Photo" : ""}
             className="h-48 w-48 rounded-full"
           />
+
+          {/* Profile Name */}
+          <div className="my-3">
+            <p className="text-4xl font-semibold">
+              {profileData[0].firstName}&nbsp;{profileData[0].lastName}
+            </p>
+          </div>
+
           {/* Profile email */}
-          <p>{profileData ? profileData[0]?.email : ""}</p>
+          <div className="mb-8">
+            <p>{profileData[0].email}</p>
+          </div>
 
           {/* List of links */}
           {linksData.map((link) => (
-            <LinkButton name={link.platform} /> // Assuming you have or add a 'key' prop
+            <LinkButton platform={link.platform} color={link.color} /> // Assuming you have or add a 'key' prop
           ))}
         </div>
       ) : (
