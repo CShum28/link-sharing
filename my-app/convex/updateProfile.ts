@@ -31,7 +31,6 @@ export const updateProfile = mutation({
         lastName: args.profile.lastName,
         email: args.profile.email,
       });
-      console.log("Profile updated");
     } else {
       // if profile does not exist, create a new profile in db
       await ctx.db.insert("profiles", {
@@ -41,7 +40,6 @@ export const updateProfile = mutation({
         lastName: args.profile.lastName,
         email: args.profile.email,
       });
-      console.log("Profile added");
     }
   },
 });
