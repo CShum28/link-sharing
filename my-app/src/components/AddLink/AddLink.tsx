@@ -42,7 +42,7 @@ const options: Options[] = [
     value: "frontendMentor",
     label: "Frontend Mentor",
     placeholder: "eg. https://www.frontendmentor.io/profile/username",
-    color: "FFFFFF",
+    color: "6DECB8",
   },
   {
     image: "",
@@ -92,13 +92,6 @@ const options: Options[] = [
     label: "Codewars",
     placeholder: "eg. https://www.codewars.com/users/username",
     color: "8A1A50",
-  },
-  {
-    image: "",
-    value: "codepen",
-    label: "Codepen",
-    placeholder: "eg. https://codepen.io/username",
-    color: "",
   },
   {
     image: "",
@@ -161,8 +154,6 @@ const AddLink: React.FC<AddLinkProps> = ({
       (option) => option.value === selectedPlatform
     );
 
-    console.log(platformDetails);
-
     if (platformDetails) {
       // Create a new updatedLink with the platform details including color and placeholder
       const updatedLink = {
@@ -172,7 +163,6 @@ const AddLink: React.FC<AddLinkProps> = ({
         placeholder: platformDetails.placeholder,
       };
 
-      console.log(updatedLink);
       // Update the local state and notify the parent component
       setLink(updatedLink);
       updateLink(updatedLink);
@@ -196,6 +186,7 @@ const AddLink: React.FC<AddLinkProps> = ({
         <button
           className="text-secondaryText"
           onClick={() => deleteLink(link.number)}
+          type="button"
         >
           Remove
         </button>
