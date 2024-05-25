@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import UpdateProfile from "@/components/UpdateProfile/UpdateProfile";
+import ProfilePreview from "@/components/PreviewProfile/PreviewProfile";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { useUser } from "@clerk/nextjs";
@@ -22,6 +23,7 @@ export default function Profile() {
     lastName: "",
     email: "",
   });
+
   // Get existing user through clerk
   const { user } = useUser();
 
@@ -31,16 +33,38 @@ export default function Profile() {
   });
 
   useEffect(() => {
+    // Function converts image URL to File type which is needed for profile.photo
+    const convertUrlToFile = async (url: string): Promise<File> => {
+      const response = await fetch(url);
+      const data = await response.blob();
+      const metadata = { type: "image/png" };
+      return new File([data], "profile_picture.png", metadata);
+    };
+
+    // ensure profile data exists before continuing
     if (profileData && profileData.length > 0) {
       const profileInfo = profileData[0];
-      console.log(profileInfo);
-      setProfile({
-        photo: profileInfo.imageUrl,
-        photoPreview: profileInfo.imageUrl,
-        firstName: profileInfo.firstName,
-        lastName: profileInfo.lastName,
-        email: profileInfo.email,
-      });
+
+      if (profileInfo.imageUrl) {
+        // Convert the file and the use the file to set the state of SetProfile
+        convertUrlToFile(profileInfo.imageUrl).then((file) => {
+          setProfile({
+            photo: file, // Set converted file here
+            photoPreview: profileInfo.imageUrl,
+            firstName: profileInfo.firstName,
+            lastName: profileInfo.lastName,
+            email: profileInfo.email,
+          });
+        });
+      } else {
+        setProfile({
+          photo: null,
+          photoPreview: null,
+          firstName: profileInfo.firstName,
+          lastName: profileInfo.lastName,
+          email: profileInfo.email,
+        });
+      }
     }
   }, [profileData]);
 
@@ -84,6 +108,8 @@ export default function Profile() {
       return; // Exit the function if there's no user id.
     }
 
+    console.log(profile.photo);
+
     // Step 1: Get a short-lived upload URL
     const postUrl = await generateUploadUrl();
     // Step 2: POST the file to the URL
@@ -94,7 +120,6 @@ export default function Profile() {
     });
     const { storageId } = await result.json();
 
-    console.log(profile);
     updateProfile({
       userId: user.id,
       profile: {
@@ -108,19 +133,26 @@ export default function Profile() {
 
   return (
     <main>
-      <div>
-        <div>
-          <p className="text-2xl font-bold">Profile Details</p>
-          <p className="text-secondaryText mt-2">
-            Add your details to create a personal touch to your profile.
-          </p>
+      <div className="flex flex-row gap-4">
+        <div className="bg-white rounded-lg mobile:hidden tablet:hidden flex w-5/12 justify-center items-center">
+          <ProfilePreview />
         </div>
-        <UpdateProfile
-          profile={profile}
-          onTextChange={handleTextChange}
-          onFileChange={handleFileChange}
-          submit={submit}
-        />
+        <div className="desktop:w-7/12 bg-white p-6 rounded-lg">
+          <div>
+            <p className="text-2xl font-bold">Profile Details</p>
+            <p className="text-secondaryText mt-2">
+              Add your details to create a personal touch to your profile.
+            </p>
+          </div>
+          <div className="">
+            <UpdateProfile
+              profile={profile}
+              onTextChange={handleTextChange}
+              onFileChange={handleFileChange}
+              submit={submit}
+            />
+          </div>
+        </div>
       </div>
     </main>
   );
