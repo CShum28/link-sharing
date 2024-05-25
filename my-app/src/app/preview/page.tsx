@@ -22,7 +22,7 @@ export default function Preview() {
     <main className="flex items-center justify-center">
       <div className="bg-white w-fit p-8 rounded-3xl">
         {profileData && linksData ? (
-          <div className="flex flex-col items-center tablet:border-2">
+          <div className="flex flex-col items-center">
             {/* Profile image */}
             <img
               src={profileData ? (profileData[0]?.imageUrl as string) : ""}

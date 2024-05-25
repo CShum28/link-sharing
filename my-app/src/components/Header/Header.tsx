@@ -78,7 +78,7 @@ export default function Header() {
                 <Link
                   key={index}
                   href={link.href}
-                  className={clsx("flex flex-row py-2 px-6 rounded-lg gap-2", {
+                  className={clsx("flex flex-row py-2 px-3 rounded-lg gap-2", {
                     "bg-disabled": pathname === link.href,
                   })}
                 >
