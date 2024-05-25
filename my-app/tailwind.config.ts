@@ -8,11 +8,6 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      // backgroundImage: {
-      //   "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-      //   "gradient-conic":
-      //     "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      // },
       colors: {
         primary: "#633CFF",
         active: "#BEADFF",
@@ -25,8 +20,8 @@ const config: Config = {
         error: "#FF3939",
       },
       screens: {
-        mobile: { max: "375px" },
-        tablet: { min: "376px", max: "768px" },
+        mobile: { max: "640px" },
+        tablet: { min: "641px", max: "768px" },
         desktop: { min: "769px" },
       },
     },
