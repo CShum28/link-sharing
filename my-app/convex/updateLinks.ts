@@ -19,7 +19,6 @@ export const updateLinks = mutation({
     ),
   },
   handler: async (ctx, args) => {
-    console.log(args.links);
     // Get array of existing links
     const existingLinks = await ctx.db
       .query("links")
