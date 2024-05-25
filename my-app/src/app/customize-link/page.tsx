@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { useUser } from "@clerk/nextjs";
+import ErrorMessage from "@/components/ErrorMessage/ErrorMessage";
 
 interface LinkInfo {
   number: number;
@@ -19,6 +20,7 @@ interface LinkInfo {
 
 export default function CustomizeLink() {
   const [links, setLinks] = useState<LinkInfo[]>([]);
+  const [errorModal, setErrorModal] = useState(false); // Error Modal to display if user has not entered in link yet
 
   // Get existing user through clerk
   const { user } = useUser();
@@ -33,12 +35,11 @@ export default function CustomizeLink() {
     // Assuming 'data' will be the array of links once the query completes
     if (data) {
       setLinks(data);
-      console.log("user data: ", data);
     }
   }, [data]); // Re-run the effect when 'data' changes
 
+  // Add new link to existing links
   const addLink = () => {
-    console.log("add");
     // Create a new link object
     const newLink: LinkInfo = {
       number: links.length + 1, // Assuming you want the number to be unique and sequential
@@ -52,6 +53,7 @@ export default function CustomizeLink() {
     setLinks((currentLinks) => [...currentLinks, newLink]);
   };
 
+  // Update the current links on save
   const updateLink = (updatedLink: LinkInfo) => {
     setLinks((currentLinks) =>
       currentLinks.map((link) =>
@@ -62,9 +64,10 @@ export default function CustomizeLink() {
   };
 
   const deleteLink = (removeNum: number) => {
+    // Only modify the local state, do not interact with the database here
     setLinks((currentLinks) => {
       const newLinks = currentLinks.filter((link) => link.number !== removeNum);
-      console.log(newLinks);
+      // Reassign link numbers
       return newLinks.map((link, index) => ({ ...link, number: index + 1 }));
     });
   };
@@ -77,12 +80,22 @@ export default function CustomizeLink() {
       return; // Exit the function if there's no user id.
     }
 
-    console.log(links);
-    updateLinks({ links: links, userId: user.id });
+    // Check to see if user selected a link platform
+    const platformCheck = links.filter((link) => link.platform === "");
+
+    // Check to see if any platforms do not have a link
+    const linkCheck = links.filter((link) => link.link === "");
+
+    if (linkCheck.length > 0 || platformCheck.length > 0) {
+      setErrorModal(true);
+    } else {
+      setErrorModal(false);
+      updateLinks({ links: links, userId: user.id });
+    }
   };
 
   return (
-    <main>
+    <main className="bg-white p-3 rounded-lg">
       <p className="text-2xl font-bold">Customize your links</p>
       <p className="text-secondaryText">
         Add/edit/remove links below and then share all your profiles with the
@@ -121,6 +134,7 @@ export default function CustomizeLink() {
             />
           </div>
         ))}
+        {errorModal && <ErrorMessage />}
         <PrimaryButton
           type="submit"
           children="Save"
