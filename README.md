@@ -25,11 +25,11 @@ Welcome to LinkSharing, the ultimate platform for managing and sharing your digi
 
 ### Convex Setup
 
-1. You will require Convex to use this application; please ensure that it is set up [here](https://www.convex.dev/start).
+You will require Convex to use this application; please ensure that it is set up [here](https://www.convex.dev/start).
 
 ### Clerk Setup
 
-1. You will require Clerk to use this application; please ensure that it is set up [here](https://clerk.com/docs/quickstarts/nextjs).
+You will require Clerk to use this application; please ensure that it is set up [here](https://clerk.com/docs/quickstarts/nextjs).
 
 ## Features
 
