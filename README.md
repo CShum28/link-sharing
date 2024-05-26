@@ -57,17 +57,17 @@ Get started today and simplify your online presence with LinkSharing!
 
 ## Images
 
-### Blank Preview
+### Blank Preview (Mobile / Tablet / Desktop)
 
 !['Blank Links'](https://github.com/CShum28/link-sharing/blob/main/my-app/public/Preview/mobile-blank-links.png)
 
 !['Blank Profile'](https://github.com/CShum28/link-sharing/blob/main/my-app/public/Preview/mobile-blank-profile.png)
 
-!['Blank Preview'](https://github.com/CShum28/link-sharing/blob/main/my-app/public/Preview/mobile-blank-preview.png)
-
 !['Blank Profile'](https://github.com/CShum28/link-sharing/blob/main/my-app/public/Preview/tablet-desktop-blank-profile.png)
 
-### Filled Preview
+!['Blank Preview'](https://github.com/CShum28/link-sharing/blob/main/my-app/public/Preview/mobile-blank-preview.png)
+
+### Filled Preview (Mobile / Tablet / Desktop)
 
 !['Filled Links'](https://github.com/CShum28/link-sharing/blob/main/my-app/public/Preview/tablet-desktop-filled-links.png)
 
