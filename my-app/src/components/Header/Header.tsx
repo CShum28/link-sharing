@@ -117,17 +117,12 @@ export default function Header() {
         </div>
       ) : (
         <div className="flex justify-between">
-          <SecondaryButton
-            children="Back to Editor"
-            onClick={goBack}
-            widthSmall
-          />
-          <PrimaryButton
-            children="Share Link"
-            type="submit"
-            onClick={copyToClipboard}
-            widthSmall
-          />
+          <SecondaryButton onClick={goBack} widthSmall>
+            <p>Back to Editor</p>
+          </SecondaryButton>
+          <PrimaryButton type="submit" onClick={copyToClipboard} widthSmall>
+            <p>Share Link</p>
+          </PrimaryButton>
         </div>
       )}
     </div>
