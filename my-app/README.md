@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Link Sharing
+
+Welcome to LinkSharing, the ultimate platform for managing and sharing your digital presence with ease. Whether you're an influencer, a professional, or just someone who loves to keep all their social links in one place, LinkSharing is designed for you.
+
+# Table of Contents
+
+1. [Getting Started](#getting-started)
+2. [MongoDB Setup](#MongoDB-Setup)
+3. [Features](#features)
+4. [Environment](#environment)
+5. [Dependencies](#dependencies)
+6. [Interface Images/GIFs](#interface-imagesgifs)
 
 ## Getting Started
 
-First, run the development server:
+1. Clone this repo: `git clone https://github.com/CShum28/link-sharing`.
+2. Copy the .env file `.env.example`
+3. Update the .env file with your Convex and Clerk credentials. Open .env in your favorite text editor and replace the placeholder values as needed.
+4. Ensure that you are using node version 12 or later: `node -v`.
+5. Install the dependencies: `npm i`.
+6. Run the Next.js development server (default should be port 3000): `npm run dev`
+7. In a separate terminal, navigate to the project directory and start the Convex development server: `npx convex dev`
+8. The app should launch automatically in your default browser.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Convex Setup
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. You will require Convex to use this application; please ensure that it is set up [here](https://www.convex.dev/start).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Clerk Setup
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. You will require Clerk to use this application; please ensure that it is set up [here](https://clerk.com/docs/quickstarts/nextjs).
 
-## Learn More
+## Features
 
-To learn more about Next.js, take a look at the following resources:
+1. Centralized Profile: Create a single profile to showcase all your social media accounts, websites, and contact information.
+2. Customizable Links: Personalize your links with custom names and colors to match your brand.
+3. Easy Sharing: Share your profile with a simple link. Perfect for networking, marketing, and personal use.
+4. Secure and Private: Your data is secure with us. Manage your links with confidence knowing your privacy is our priority.
+5. Real-time Updates: Update your profile and links on-the-go, and see the changes reflect instantly.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Get started today and simplify your online presence with LinkSharing!
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Environment
 
-## Deploy on Vercel
+- Node V12.22.xx or higher
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Dependencies
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Clerk/nextjs v4.29.9
+- Clsx v2.1.1
+- Convex v1.10.0
+- Lucide-react v0.378.0
+- React v18.0.0
+- Tailwindcss v3.3.0
+- Typescript v5.0.0
+
+## Images
+
+### Mobile Blank
+
+!['Habits Page'](https://github.com/CShum28/Habit-Forge/blob/main/client/public/images/habits-page.png)
+
+### Tablet / Desktop Blank
+
+### Mobile Filled
+
+### Tablet / Desktop Filled
