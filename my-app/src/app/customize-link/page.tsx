@@ -115,11 +115,13 @@ export default function CustomizeLink() {
               height={80}
               alt="Let's get started image"
             />
-            <p className="text-2xl font-bold my-4">Let's get you started</p>
+            <p className="text-2xl font-bold my-4">
+              Let&apos;s get you started
+            </p>
             <p className="text-secondaryText">
-              Use the "Add new link" button to get started. Once you have more
-              than one link, you can reorder and edit them. We're here to help
-              you share your profiles with everyone!
+              Use the &quot;Add new link&quot; button to get started. Once you
+              have more than one link, you can reorder and edit them. We&apos;re
+              here to help you share your profiles with everyone!
             </p>
           </div>
         )}
