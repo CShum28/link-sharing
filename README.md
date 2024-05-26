@@ -57,12 +57,20 @@ Get started today and simplify your online presence with LinkSharing!
 
 ## Images
 
-### Mobile Blank
+### Blank Preview
 
-!['Habits Page'](https://github.com/CShum28/Habit-Forge/blob/main/client/public/images/habits-page.png)
+!['Blank Links'](https://github.com/CShum28/link-sharing/blob/main/my-app/public/Preview/mobile-blank-links.png)
 
-### Tablet / Desktop Blank
+!['Blank Profile'](https://github.com/CShum28/link-sharing/blob/main/my-app/public/Preview/mobile-blank-profile.png)
 
-### Mobile Filled
+!['Blank Preview'](https://github.com/CShum28/link-sharing/blob/main/my-app/public/Preview/mobile-blank-preview.png)
 
-### Tablet / Desktop Filled
+!['Blank Profile'](https://github.com/CShum28/link-sharing/blob/main/my-app/public/Preview/tablet-desktop-blank-profile.png)
+
+### Filled Preview
+
+!['Filled Links'](https://github.com/CShum28/link-sharing/blob/main/my-app/public/Preview/tablet-desktop-filled-links.png)
+
+!['Filled Tablet / Desktop Profile'](https://github.com/CShum28/link-sharing/blob/main/my-app/public/Preview/tablet-desktop-filled-profile.png)
+
+!['Filled Preview'](https://github.com/CShum28/link-sharing/blob/main/my-app/public/Preview/tablet-desktop-filled-preview.png)
