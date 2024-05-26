@@ -125,7 +125,9 @@ const UpdateProfile: React.FC<UpdateProfileProps> = ({
           </div>
         </div>
         <div className="border-t-2 p-3 bg-background rounded-b-lg">
-          <PrimaryButton children="Save" type="submit" widthFull />
+          <PrimaryButton type="submit" widthFull>
+            <p>Save</p>
+          </PrimaryButton>
         </div>
       </form>
     </div>
