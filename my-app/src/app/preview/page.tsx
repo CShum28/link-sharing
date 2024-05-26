@@ -25,29 +25,59 @@ export default function Preview() {
           <div className="flex flex-col items-center">
             {/* Profile image */}
             <img
-              src={profileData ? (profileData[0]?.imageUrl as string) : ""}
-              alt={profileData ? "Profile Photo" : ""}
+              src={
+                profileData.length > 0
+                  ? (profileData[0]?.imageUrl as string)
+                  : "/blank-circle.png"
+              }
+              alt={
+                profileData && profileData[0]?.imageUrl
+                  ? "Profile Photo"
+                  : "Blank Profile Photo"
+              }
               className="h-48 w-48 rounded-full"
             />
             {/* Profile Name */}
             <div className="my-3">
-              <p className="text-4xl font-semibold">
-                {profileData[0]?.firstName}&nbsp;{profileData[0]?.lastName}
-              </p>
+              {profileData.length > 0 ? (
+                <>
+                  <p className="text-2xl font-bold">
+                    {profileData[0]?.firstName} {profileData[0]?.lastName}
+                  </p>
+                </>
+              ) : (
+                <img
+                  src="/blank-name.png"
+                  alt="blank name"
+                  className="w-48 h-6"
+                />
+              )}
             </div>
             {/* Profile email */}
             <div className="mb-8">
-              <p>{profileData[0]?.email}</p>
+              {profileData.length > 0 ? (
+                <p>{profileData[0]?.email}</p>
+              ) : (
+                <img
+                  src="/blank-email.png"
+                  alt="blank email"
+                  className="w-32 h-4"
+                />
+              )}
             </div>
             {/* List of links */}
-            {linksData.map((link, index) => (
-              <LinkButton
-                key={index}
-                platform={link.platform}
-                color={link.color}
-                link={link.link}
-              />
-            ))}
+            {linksData.length > 0 ? (
+              linksData.map((link, index) => (
+                <LinkButton
+                  key={index}
+                  platform={link.platform}
+                  color={link.color}
+                  link={link.link}
+                />
+              ))
+            ) : (
+              <img src="/blank-links.png" alt="blank links" />
+            )}
           </div>
         ) : (
           <div>
