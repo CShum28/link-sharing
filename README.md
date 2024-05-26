@@ -5,11 +5,12 @@ Welcome to LinkSharing, the ultimate platform for managing and sharing your digi
 # Table of Contents
 
 1. [Getting Started](#getting-started)
-2. [MongoDB Setup](#MongoDB-Setup)
-3. [Features](#features)
-4. [Environment](#environment)
-5. [Dependencies](#dependencies)
-6. [Interface Images/GIFs](#interface-imagesgifs)
+2. [Convex Setup](#Convex-Setup)
+3. [Clerk Setup](#Clerk-Setup)
+4. [Features](#features)
+5. [Environment](#environment)
+6. [Dependencies](#dependencies)
+7. [Interface Images/GIFs](#interface-imagesgifs)
 
 ## Getting Started
 
