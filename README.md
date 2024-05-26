@@ -23,11 +23,11 @@ Welcome to LinkSharing, the ultimate platform for managing and sharing your digi
 7. In a separate terminal, navigate to the project directory and start the Convex development server: `npx convex dev`
 8. The app should launch automatically in your default browser.
 
-### Convex Setup
+## Convex Setup
 
 You will require Convex to use this application; please ensure that it is set up [here](https://www.convex.dev/start).
 
-### Clerk Setup
+## Clerk Setup
 
 You will require Clerk to use this application; please ensure that it is set up [here](https://clerk.com/docs/quickstarts/nextjs).
 
