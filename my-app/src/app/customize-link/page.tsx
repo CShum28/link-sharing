@@ -102,11 +102,9 @@ export default function CustomizeLink() {
         world!
       </p>
       <div className="my-8">
-        <SecondaryButton
-          children={"+ Add new link"}
-          onClick={addLink}
-          widthFull
-        />
+        <SecondaryButton onClick={addLink} widthFull>
+          <p>+ Add new link</p>
+        </SecondaryButton>
       </div>
       <form onSubmit={submitLinks}>
         {links.length === 0 && (
@@ -135,12 +133,9 @@ export default function CustomizeLink() {
           </div>
         ))}
         {errorModal && <ErrorMessage />}
-        <PrimaryButton
-          type="submit"
-          children="Save"
-          disabled={links.length === 0}
-          widthFull
-        />
+        <PrimaryButton type="submit" disabled={links.length === 0} widthFull>
+          <p>Save</p>
+        </PrimaryButton>
       </form>
     </main>
   );
